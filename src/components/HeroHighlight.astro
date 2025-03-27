@@ -1,0 +1,37 @@
+---
+interface Props {
+  normal: string;
+  highlight: string;
+}
+
+const { normal, highlight } = Astro.props;
+---
+
+<h1>{normal}<br /><strong class="highlight">{highlight}</strong></h1>
+
+<style>
+  h1 {
+    font-family: Spectral;
+    font-size: 5rem;
+    font-weight: 400;
+    line-height: 1;
+    text-align: left;
+    margin-bottom: 1em;
+  }
+  @media screen and (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 0.5em;
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 992px) {
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5em;
+    }
+  }
+  h1 .highlight {
+    font-weight: 700;
+  }
+</style>

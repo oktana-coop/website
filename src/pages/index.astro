@@ -1,11 +1,71 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import NavigationBar from '../components/NavigationBar.astro';
+import MainContainer from '../components/MainContainer.astro';
+import HeroHighlight from '../components/HeroHighlight.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Oktana">
+  <MainContainer>
+    <NavigationBar />
+    <div class="hero">
+      <div class="hero-message-container">
+        <p class="hero-message">
+          We are a small, democratically-governed collective specialized in
+          building software products. We aspire to be one of those spaces where
+          autonomous people organize themselves and care for each other, commons
+          are built and a higher level of sharing is reached.
+        </p>
+      </div>
+      <div class="hero-heading-container">
+        <HeroHighlight normal="Utopian" highlight="R&D Collective" />
+      </div>
+    </div>
+  </MainContainer>
 </Layout>
+
+<style>
+  .hero {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .hero-message-container {
+    display: flex;
+    justify-content: right;
+    padding: 0 24px;
+  }
+  @media screen and (max-width: 600px) {
+    .hero-message-container {
+      justify-content: center;
+    }
+  }
+  .hero-message {
+    font-size: 1.25rem;
+    font-weight: 200;
+    color: rgba(0, 0, 0, 0.54);
+    margin: 0;
+    max-width: 600px;
+    text-align: right;
+  }
+  .hero-heading-container {
+    display: flex;
+    margin: 0 24px;
+  }
+  @media screen and (max-width: 600px) {
+    .hero-message {
+      font-size: 1rem;
+      text-align: center;
+    }
+    .hero-heading-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 992px) {
+    .hero-message {
+      font-size: 1.1rem;
+    }
+  }
+</style>
