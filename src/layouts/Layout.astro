@@ -41,6 +41,10 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -50,6 +54,12 @@ const { title } = Astro.props;
 </html>
 <style is:global>
   @import 'tailwindcss';
+
+  @theme {
+    --font-sans: 'Noto Sans', sans-serif;
+    --font-serif: 'Spectral', serif;
+    --font-mono: 'Fira Code', monospace;
+  }
 
   html {
     font-family: 'Noto Sans', sans-serif;
