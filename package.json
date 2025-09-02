@@ -10,11 +10,11 @@
     "prettify": "prettier --write --config .prettierrc --ignore-unknown"
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.2.4",
-    "astro": "^5.5.5"
+    "@astrojs/netlify": "^6.5.9",
+    "astro": "^5.13.5"
   },
   "devDependencies": {
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1"
   }
 }
