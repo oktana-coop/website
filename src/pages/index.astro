@@ -1,29 +1,61 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import NavigationBar from '../components/NavigationBar.astro';
 import MainContainer from '../components/MainContainer.astro';
 import HeroHighlight from '../components/HeroHighlight.astro';
 import Footer from '../components/Footer.astro';
+import v2Logo from '../assets/images/v2-logo-light.svg';
+import v2Screenshot from '../assets/images/v2-screenshot.png';
 ---
 
 <Layout title="Oktana">
   <MainContainer>
     <NavigationBar />
-    <div class="flex flex-auto flex-col justify-around">
-      <div class="flex justify-center sm:justify-end px-6 py-0">
-        <p
-          class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center sm:text-right m-0 text-black/55 font-extralight max-w-[600px]"
-        >
-          We are a small, democratically-governed collective specialized in
-          building software products. We aspire to be one of those spaces where
-          autonomous people organize themselves and care for each other, commons
-          are built and a higher level of sharing is reached.
-        </p>
+
+    <div class="flex flex-col align-center px-6 gap-10 sm:gap-30 md:gap-40">
+      <div class="flex flex-auto flex-col justify-around h-[90vh] sm:h-[75vh]">
+        <div class="flex justify-center sm:justify-end py-0">
+          <p
+            class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center sm:text-right m-0 text-black/55 font-extralight max-w-[600px]"
+          >
+            We are a small, democratically-governed collective specialized in
+            building software products. We aspire to be one of those spaces
+            where autonomous people organize themselves and care for each other,
+            commons are built and a higher level of sharing is reached.
+          </p>
+        </div>
+        <div class="flex my-0 justify-center sm:justify-start">
+          <HeroHighlight normal="Utopian" highlight="R&D Collective" />
+        </div>
       </div>
-      <div class="flex mx-6 my-0 justify-center sm:justify-start">
-        <HeroHighlight normal="Utopian" highlight="R&D Collective" />
+      <div class="flex flex-col items-center gap-8">
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none text-center"
+        >
+          Products
+        </h2>
+        <div class="flex flex-col gap-10">
+          <div class="flex flex-col items-center gap-6">
+            <a href="https://v2editor.com">
+              <Image src={v2Logo} alt="v2" height="72" />
+            </a>
+            <p
+              class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center font-extralight"
+            >
+              A local-first editor with Git-style version control, true privacy,
+              and complete control over your data
+            </p>
+          </div>
+          <Image
+            src={v2Screenshot}
+            alt="v2 Screenshot"
+            class="drop-shadow-xl/25"
+          />
+        </div>
       </div>
     </div>
+
     <Footer />
   </MainContainer>
 </Layout>
