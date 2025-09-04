@@ -6,7 +6,7 @@ interface Props {
 }
 
 const {
-  title,
+  title = 'Oktana',
   description = 'Utopian R&D collective specialized in building software products.',
   image = 'https://oktana.dev/oktana-1200x630.png',
 } = Astro.props;
@@ -18,8 +18,6 @@ const {
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
-    <meta property="og:title" content="Oktana" />
-    <meta name="twitter:title" content="Oktana" />
 
     <!-- SEO -->
     <title>{title}</title>
