@@ -24,8 +24,8 @@ const { post, isFeatured } = Astro.props;
   >
   <p
     class={isFeatured
-      ? 'text-base/7 md:text-lg/8 text-black font-light'
-      : 'text-sm/6 text-black font-light'}
+      ? 'text-base/7 md:text-lg/8 text-justify text-black font-light'
+      : 'text-sm/6 text-black text-justify font-light'}
   >
     {post.description}
   </p>
