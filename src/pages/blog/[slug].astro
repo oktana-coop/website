@@ -16,7 +16,11 @@ if (!post) {
 const { Content } = await render(post);
 ---
 
-<Layout title="Oktana">
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+>
   <MainContainer>
     <NavigationBar />
 

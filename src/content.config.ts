@@ -7,6 +7,7 @@ const blog = defineCollection({
     slug: z.string(),
     title: z.string(),
     description: z.string(),
+    image: z.string().url().optional(),
     status: z.enum(['unstarted', 'draft', 'published']).default('unstarted'),
     createdAt: z.coerce.date(),
     publishedAt: z.coerce.date().optional(),
