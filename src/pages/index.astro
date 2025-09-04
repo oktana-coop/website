@@ -10,7 +10,6 @@ import HeroHighlight from './_index-components/HeroHighlight.astro';
 import BlogPost from './_index-components/BlogPost.astro';
 import v2Logo from '../assets/images/v2-logo-light.svg';
 import v2Screenshot from '../assets/images/v2-screenshot.png';
-import { undefined } from 'astro:schema';
 
 const featuredBlogPost = await getEntry('blog', 'introducing-v2-editor');
 if (!featuredBlogPost) {
