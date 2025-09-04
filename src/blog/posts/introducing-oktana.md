@@ -1,3 +1,11 @@
+---
+slug: introducing-oktana
+title: 'Introducing Oktana'
+description: 'The introductory text for our newly formed collective, Oktana. Read about why we came together, our critique and vision for work and technology and our desires for the present and future of our initiative.'
+status: 'draft'
+createdAt: '2025-09-04'
+---
+
 # Introducing Oktana
 
 Oktana is a newly formed collective of friends specialized in building software products. We work according to the cooperative principles, so we are democratically governed, there is no employer among us and we are not associated with the venture capital business. Oktana has a statutory political character: We stand critical against the twisted capitalist society we live in but we also understand that we are its subjects and the best we can do is criticize it from within and try to transform it. We know that creating emancipatory social forms is a collective project and this is why we strive to organize and connect with people and initiatives sharing our principles and desires.

@@ -13,6 +13,7 @@
     "@astrojs/netlify": "^6.5.9",
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.5",
+    "rehype-class-names": "^2.0.0",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {

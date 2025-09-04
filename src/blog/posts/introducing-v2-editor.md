@@ -1,3 +1,12 @@
+---
+slug: introducing-v2-editor
+title: 'Introducing v2 Editor'
+description: 'The manifesto for our brand new rich text editor with version control capabilities, v2. In this post, we describe the basic principles, design decisions and our vision for v2, alongside reflecting on the current state and potential future of knowledge production in society.'
+status: 'published'
+createdAt: 2025-09-04
+publishedAt: 2025-09-04
+---
+
 # Introducing v2 Editor
 
 At [Oktana](https://oktana.dev/), we are knowledge workers and our main experience is in the software production industry. Reflecting on our everyday practices building software, the current state of knowledge production in other domains and the way the aforementioned practices could benefit them, as well as the potential of knowledge as a commons more generally, we decided that a foundational problem we could work on is _writing_, and specifically _prose_ in the form of _rich text_. Writing liberated human communication from the restrictions of time and space and was certainly revolutionary for the thinking process and knowledge production and sharing. Technology associated to writing, like the printing press and paper, released people from the domination of the immediate and the local in even greater scale [^1]. Although the arrival of digital media and computing has transformed writing, we believe it has fallen short of its potential, articulated by computer pioneers even decades before [^2]. Compared, for example, with the tools software engineers have at their disposal, contemporary writing tools just feel outdated and inferior. The tools we use shape our thinking and to a big extent define our capabilities and methodologies when attacking problems and we believe that, implemented right, quality writing tools can help us harness the complexity of the activity itself, facilitating the thinking process and allowing us to experiment fearlessly and collaborate effectively. Another reason we decided to attack this problem is that writing is foundational for challenges related to linking knowledge or achieving social collaboration at scale in producing it, which are of great interest to us.

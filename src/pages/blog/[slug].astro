@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import NavigationBar from '../../components/NavigationBar.astro';
+import Footer from '../../components/Footer.astro';
+import MainContainer from '../../components/MainContainer.astro';
+
+const { slug } = Astro.params;
+const posts = await getCollection('blog');
+const post = posts.find((p) => p.data.slug === slug);
+
+if (!post) {
+  throw new Error('Blog post not found');
+}
+
+const { Content } = await render(post);
+---
+
+<Layout title="Oktana">
+  <MainContainer>
+    <NavigationBar />
+
+    <div class="flex justify-center">
+      <div class="px-6 flex-auto w-full max-w-3xl">
+        <Content />
+      </div>
+    </div>
+
+    <Footer />
+  </MainContainer>
+</Layout>
