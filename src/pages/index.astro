@@ -9,65 +9,21 @@ import Footer from '../components/Footer.astro';
 <Layout title="Oktana">
   <MainContainer>
     <NavigationBar />
-    <div class="hero">
-      <div class="hero-message-container">
-        <p class="hero-message">
+    <div class="flex flex-auto flex-col justify-around">
+      <div class="flex justify-center sm:justify-end px-6 py-0">
+        <p
+          class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center sm:text-right m-0 text-black/55 font-extralight max-w-[600px]"
+        >
           We are a small, democratically-governed collective specialized in
           building software products. We aspire to be one of those spaces where
           autonomous people organize themselves and care for each other, commons
           are built and a higher level of sharing is reached.
         </p>
       </div>
-      <div class="hero-heading-container">
+      <div class="flex mx-6 my-0 justify-center sm:justify-start">
         <HeroHighlight normal="Utopian" highlight="R&D Collective" />
       </div>
     </div>
     <Footer />
   </MainContainer>
 </Layout>
-
-<style>
-  .hero {
-    flex: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  .hero-message-container {
-    display: flex;
-    justify-content: right;
-    padding: 0 24px;
-  }
-  @media screen and (max-width: 600px) {
-    .hero-message-container {
-      justify-content: center;
-    }
-  }
-  .hero-message {
-    font-size: 1.25rem;
-    font-weight: 200;
-    color: rgba(0, 0, 0, 0.54);
-    margin: 0;
-    max-width: 600px;
-    text-align: right;
-  }
-  .hero-heading-container {
-    display: flex;
-    margin: 0 24px;
-  }
-  @media screen and (max-width: 600px) {
-    .hero-message {
-      font-size: 1rem;
-      text-align: center;
-    }
-    .hero-heading-container {
-      display: flex;
-      justify-content: center;
-    }
-  }
-  @media screen and (min-width: 600px) and (max-width: 992px) {
-    .hero-message {
-      font-size: 1.1rem;
-    }
-  }
-</style>
