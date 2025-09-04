@@ -1,0 +1,30 @@
+---
+import type { InferEntrySchema } from 'astro:content';
+
+interface Props {
+  post: InferEntrySchema<'blog'>;
+  isFeatured: boolean;
+}
+
+const { post, isFeatured } = Astro.props;
+---
+
+<div class="flex flex-col items-center sm:items-start gap-2">
+  <p class="text-xs md:text-sm text-black/75">
+    {post.publishedAt ? post.publishedAt.toLocaleDateString() : 'Coming Soon'}
+  </p>
+  <a href=`/blog/${post.slug}`
+    ><h3
+      class={isFeatured
+        ? 'text-lg md:text-[1.375rem] font-serif text-center sm:text-left font-serif font-bold'
+        : 'text-base md:text-lg font-serif text-center sm:text-left font-bold'}
+    >
+      {post.title}
+    </h3></a
+  >
+  <p
+    class={isFeatured ? 'text-base/7 md:text-lg/9' : 'text-sm/6 md:text-base/7'}
+  >
+    {post.description}
+  </p>
+</div>

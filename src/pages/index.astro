@@ -1,12 +1,29 @@
 ---
 import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
+
 import Layout from '../layouts/Layout.astro';
 import NavigationBar from '../components/navigation/BigNavigationBar.astro';
 import MainContainer from '../components/MainContainer.astro';
 import Footer from '../components/Footer.astro';
-import HeroHighlight from '../components/HeroHighlight.astro';
+import HeroHighlight from './_index-components/HeroHighlight.astro';
+import BlogPost from './_index-components/BlogPost.astro';
 import v2Logo from '../assets/images/v2-logo-light.svg';
 import v2Screenshot from '../assets/images/v2-screenshot.png';
+import { undefined } from 'astro:schema';
+
+const featuredBlogPost = await getEntry('blog', 'introducing-v2-editor');
+if (!featuredBlogPost) {
+  throw new Error('Featured blog post not found');
+}
+
+const blogPosts = [
+  await getEntry('blog', 'introducing-oktana'),
+  await getEntry('blog', 'v2-technical-dive'),
+].filter((post) => !!post);
+if (blogPosts.length !== 2) {
+  throw new Error('Blog post not found');
+}
 ---
 
 <Layout title="Oktana">
@@ -52,6 +69,25 @@ import v2Screenshot from '../assets/images/v2-screenshot.png';
             alt="v2 Screenshot"
             class="drop-shadow-xl/25"
           />
+        </div>
+      </div>
+      <div class="flex flex-col items-center gap-8">
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none text-center"
+        >
+          Writing
+        </h2>
+        <div class="flex flex-col lg:flex-row gap-10">
+          <div class="flex flex-col items-center gap-10">
+            <BlogPost post={featuredBlogPost.data} isFeatured />
+          </div>
+          <div class="flex flex-col items-center gap-10">
+            {
+              blogPosts.map((post) => (
+                <BlogPost post={post.data} isFeatured={false} />
+              ))
+            }
+          </div>
         </div>
       </div>
     </div>
