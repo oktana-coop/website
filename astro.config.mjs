@@ -28,7 +28,7 @@ export default defineConfig({
           ul: 'list-disc pl-6 mb-4',
           ol: 'list-decimal pl-6 mb-4',
           li: 'text-base/7 md:text-lg/9 text-left sm:text-justify',
-          pre: 'p-4 font-mono bg-black/5 overflow-x-auto mb-2',
+          pre: 'p-4 font-mono bg-black/5 overflow-x-auto mb-6',
         },
       ],
     ],
