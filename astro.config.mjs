@@ -27,8 +27,13 @@ export default defineConfig({
           h6: 'text-sm md:text-base font-serif font-bold mb-2',
           ul: 'list-disc pl-6 mb-4',
           ol: 'list-decimal pl-6 mb-4',
+          li: 'text-base/7 md:text-lg/9 text-left sm:text-justify',
+          pre: 'p-4 font-mono bg-black/5 overflow-x-auto mb-2',
         },
       ],
     ],
+    shikiConfig: {
+      theme: 'catppuccin-macchiato',
+    },
   },
 });

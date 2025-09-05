@@ -18,9 +18,10 @@ if (!featuredBlogPost) {
 
 const blogPosts = [
   await getEntry('blog', 'introducing-oktana'),
+  await getEntry('blog', 'rich-text-representations'),
   await getEntry('blog', 'v2-technical-dive'),
 ].filter((post) => !!post);
-if (blogPosts.length !== 2) {
+if (blogPosts.length !== 3) {
   throw new Error('Blog post not found');
 }
 ---
