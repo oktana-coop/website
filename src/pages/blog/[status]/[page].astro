@@ -1,0 +1,67 @@
+---
+import { type GetStaticPaths, type Page } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import NavigationBar from '../../../components/navigation/SmallNavigationBar.astro';
+import Footer from '../../../components/Footer.astro';
+import MainContainer from '../../../components/MainContainer.astro';
+import { type Post } from '../../../models/post';
+import BlogPost from '../../../components/BlogPost.astro';
+
+export const prerender = true;
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allBlogPostEntries = await getCollection('blog');
+
+  type ExtendedStatus = Post['status'] | 'unpublished';
+
+  const statusPaths = [
+    'published',
+    'draft',
+    'unstarted',
+    'unpublished',
+  ] as ExtendedStatus[];
+
+  return statusPaths.flatMap((status) => {
+    const filteredPosts = allBlogPostEntries.filter((post) =>
+      status === 'unpublished'
+        ? post.data.status !== 'published'
+        : post.data.status === status
+    );
+
+    return paginate(filteredPosts, {
+      params: { status },
+      pageSize: 10,
+    });
+  });
+};
+
+const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
+---
+
+<Layout
+  title="Oktana Blog"
+  description="Oktana is a utopian R&D collective specialized in building software products. Read our latest articles and updates on our blog."
+>
+  <MainContainer>
+    <NavigationBar />
+
+    <div class="flex-auto flex flex-col gap-6 md:gap-8 px-6">
+      <h1
+        class="text-center sm:text-left text-4xl sm:text-5xl md:text-6xl font-serif font-bold"
+      >
+        Blog
+      </h1>
+
+      <div class="flex flex-col gap-16">
+        {
+          page.data.map((postEntry) => (
+            <BlogPost post={postEntry.data} size="normal" />
+          ))
+        }
+      </div>
+    </div>
+
+    <Footer />
+  </MainContainer>
+</Layout>
