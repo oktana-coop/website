@@ -4,8 +4,9 @@ title: 'Introducing v2 Editor'
 description: 'The manifesto for our brand new rich text editor with version control capabilities, v2. In this post, we describe the basic principles, design decisions and our vision for v2, alongside reflecting on the current state and potential future of knowledge production in society.'
 image: 'https://oktana.dev/v2-1200x630.png'
 status: 'published'
-createdAt: 2025-09-04
-publishedAt: 2025-09-04
+createdAt: '2025-09-04'
+updatedAt: '2025-09-04'
+publishedAt: '2025-09-04'
 ---
 
 # Introducing v2 Editor

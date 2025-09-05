@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { z } from 'astro:content';
 
 export const postSchema = z.object({
   slug: z.string(),
@@ -7,11 +7,15 @@ export const postSchema = z.object({
   image: z.string().url().optional(),
   status: z.enum(['unstarted', 'draft', 'published']).default('unstarted'),
   createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
   publishedAt: z.coerce.date().optional(),
-  updatedAt: z.coerce.date().optional(),
 });
 
 export type Post = z.infer<typeof postSchema>;
+
+export type PublishedPost = Post & { status: 'published'; publishedAt: Date };
+export type DraftPost = Post & { status: 'draft' };
+export type UnstartedPost = Post & { status: 'unstarted' };
 
 export const getDisplayDate = (post: Post) => {
   if (post.status === 'published' && post.publishedAt) {
@@ -27,4 +31,16 @@ export const getDisplayDate = (post: Post) => {
   }
 
   return 'Coming Soon';
+};
+
+export const isPublishedPost = (post: Post): post is PublishedPost => {
+  return post.status === 'published' && post.publishedAt !== undefined;
+};
+
+export const isDraftPost = (post: Post): post is DraftPost => {
+  return post.status === 'draft';
+};
+
+export const isUnstartedPost = (post: Post): post is UnstartedPost => {
+  return post.status === 'unstarted';
 };

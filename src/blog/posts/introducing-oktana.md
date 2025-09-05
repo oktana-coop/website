@@ -4,6 +4,7 @@ title: 'Introducing Oktana'
 description: 'The introductory text for our newly formed collective, Oktana. Read about why we came together, our critique and vision for work and technology and our desires for the present and future of our initiative.'
 status: 'draft'
 createdAt: '2025-09-04'
+updatedAt: '2025-09-04'
 ---
 
 # Introducing Oktana

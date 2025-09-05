@@ -1,13 +1,13 @@
 ---
-import { type Post, getDisplayDate } from '../../models/post';
-import DocumentStatusBadge from '../../components/DocumentStatusBadge.astro';
+import { type Post, getDisplayDate } from '../models/post';
+import DocumentStatusBadge from './DocumentStatusBadge.astro';
 
 interface Props {
   post: Post;
-  isFeatured: boolean;
+  size: 'small' | 'normal';
 }
 
-const { post, isFeatured } = Astro.props;
+const { post, size } = Astro.props;
 ---
 
 <div class="flex flex-col items-center sm:items-start gap-2">
@@ -20,7 +20,7 @@ const { post, isFeatured } = Astro.props;
 
   <a href=`/blog/${post.slug}`
     ><h3
-      class={isFeatured
+      class={size === 'normal'
         ? 'text-xl sm:text-2xl md:text-3xl text-center sm:text-left font-serif font-bold'
         : 'text-lg md:text-[1.375rem] text-center sm:text-left font-serif font-bold'}
     >
@@ -28,7 +28,7 @@ const { post, isFeatured } = Astro.props;
     </h3></a
   >
   <p
-    class={isFeatured
+    class={size === 'normal'
       ? 'text-base/7 md:text-lg/8 text-justify text-black font-light'
       : 'text-sm/6 text-black text-justify font-light'}
   >

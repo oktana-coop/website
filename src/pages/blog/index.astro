@@ -1,0 +1,74 @@
+---
+import { getCollection, render, type InferEntrySchema } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import NavigationBar from '../../components/navigation/SmallNavigationBar.astro';
+import Footer from '../../components/Footer.astro';
+import MainContainer from '../../components/MainContainer.astro';
+import { type Post, isPublishedPost } from '../../models/post';
+import BlogPost from '../../components/BlogPost.astro';
+
+const allBlogPostEntries = await getCollection('blog');
+
+const publishedBlogPosts = allBlogPostEntries
+  .map((entry) => entry.data)
+  .filter((post: Post) => isPublishedPost(post))
+  // Sort by published date in descending order
+  .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+  // Limit to 3 posts
+  .slice(0, 3);
+
+const upcomingPosts = allBlogPostEntries
+  .map((entry) => entry.data)
+  .filter((post: Post) => !isPublishedPost(post))
+  // Sort by updated date in descending order
+  .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+  // Limit to 3 posts
+  .slice(0, 3);
+---
+
+<Layout title="Blog" description="Oktana Blog">
+  <MainContainer>
+    <NavigationBar />
+
+    <div class="flex-auto flex flex-col gap-6 md:gap-8 px-6">
+      <h1
+        class="text-center sm:text-left text-4xl sm:text-5xl md:text-6xl font-serif font-bold"
+      >
+        Blog
+      </h1>
+
+      {
+        publishedBlogPosts.length > 0 && (
+          <div class="flex flex-col gap-16">
+            {publishedBlogPosts.map((post) => (
+              <BlogPost post={post} size="normal" />
+            ))}
+          </div>
+        )
+      }
+
+      {
+        publishedBlogPosts.length > 0 && upcomingPosts.length > 0 && (
+          <hr class="my-14 opacity-10" />
+        )
+      }
+
+      {
+        upcomingPosts.length > 0 && (
+          <div class="flex flex-col gap-6 md:gap-8">
+            <h2 class="text-center sm:text-left text-2xl sm:text-3xl md:text-4xl font-serif font-bold">
+              Coming Soon
+            </h2>
+            <div class="flex flex-col gap-16">
+              {upcomingPosts.map((post) => (
+                <BlogPost post={post} size="normal" />
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <Footer />
+  </MainContainer>
+</Layout>
