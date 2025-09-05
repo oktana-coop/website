@@ -1,7 +1,7 @@
 ---
 slug: rich-text-representations
 title: 'Rich Text Representations'
-description: 'This post explores various models for representing rich text: Pandoc, ProseMirror and Automerge.'
+description: 'This post explores various models for representing rich text: Pandoc, ProseMirror and Automerge. All three models are used in our v2 editor for various use cases: Drafting documents in the web, seamlessly merging even in a live collaboration setting, diffing and converting between formats.'
 status: 'draft'
 createdAt: '2025-09-05'
 updatedAt: '2025-09-05'
