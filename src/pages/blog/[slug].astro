@@ -1,32 +1,37 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type InferEntrySchema } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import NavigationBar from '../../components/navigation/SmallNavigationBar.astro';
 import Footer from '../../components/Footer.astro';
 import MainContainer from '../../components/MainContainer.astro';
+import DocumentStatusBadge from '../../components/DocumentStatusBadge.astro';
+import { getDisplayDate } from '../../models/post';
 
 const { slug } = Astro.params;
 const posts = await getCollection('blog');
-const post = posts.find((p) => p.data.slug === slug);
+const postEntry = posts.find((p) => p.data.slug === slug);
 
-if (!post) {
+if (!postEntry) {
   throw new Error('Blog post not found');
 }
 
-const { Content } = await render(post);
+const post = postEntry.data;
+const { Content } = await render(postEntry);
 ---
 
-<Layout
-  title={post.data.title}
-  description={post.data.description}
-  image={post.data.image}
->
+<Layout title={post.title} description={post.description} image={post.image}>
   <MainContainer>
     <NavigationBar />
 
     <div class="flex flex-auto justify-center">
-      <div class="px-6 flex-auto w-full max-w-3xl">
-        <Content />
+      <div class="px-6 flex-auto w-full max-w-3xl flex flex-col gap-3">
+        <div class="flex-initial flex items-center gap-4">
+          <p class="text-xs md:text-sm text-black/75">{getDisplayDate(post)}</p>
+          {post.status === 'draft' && <DocumentStatusBadge text="Draft" />}
+        </div>
+        <div>
+          <Content />
+        </div>
       </div>
     </div>
 
