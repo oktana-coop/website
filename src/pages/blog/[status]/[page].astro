@@ -7,6 +7,7 @@ import Footer from '../../../components/Footer.astro';
 import MainContainer from '../../../components/MainContainer.astro';
 import { type Post } from '../../../models/post';
 import BlogPost from '../../../components/BlogPost.astro';
+import PaginationControls from '../../../components/PaginationControls.astro';
 
 export const prerender = true;
 
@@ -31,12 +32,13 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 
     return paginate(filteredPosts, {
       params: { status },
-      pageSize: 10,
+      pageSize: 2,
     });
   });
 };
 
 const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
+const { status } = Astro.params as { status: string };
 ---
 
 <Layout
@@ -61,6 +63,12 @@ const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
         }
       </div>
     </div>
+
+    {
+      page.lastPage > 1 && (
+        <PaginationControls page={page} basePath={`/blog/${status}`} />
+      )
+    }
 
     <Footer />
   </MainContainer>

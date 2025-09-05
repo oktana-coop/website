@@ -5,6 +5,8 @@ import netlify from '@astrojs/netlify';
 import tailwindcss from '@tailwindcss/vite';
 import rehypeClassNames from 'rehype-class-names';
 
+import icon from 'astro-icon';
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
@@ -36,4 +38,9 @@ export default defineConfig({
       theme: 'catppuccin-macchiato',
     },
   },
+  integrations: [
+    icon({
+      iconDir: 'src/assets/icons',
+    }),
+  ],
 });
