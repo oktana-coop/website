@@ -8,6 +8,7 @@ import MainContainer from '../components/MainContainer.astro';
 import Footer from '../components/Footer.astro';
 import HeroHighlight from './_index-components/HeroHighlight.astro';
 import BlogPost from '../components/BlogPost.astro';
+import Button from '../components/actions/buttons/Button.astro';
 import v2Logo from '../assets/images/v2-logo-light.svg';
 import v2Screenshot from '../assets/images/v2-screenshot.png';
 
@@ -80,10 +81,19 @@ if (blogPosts.length !== 3) {
           </h2>
         </a>
         <div class="flex flex-col lg:flex-row gap-10">
-          <div class="flex flex-col items-center gap-10">
+          <div class="flex flex-col items-stretch sm:items-start gap-4">
             <BlogPost post={featuredBlogPost.data} size="normal" />
+            <a href=`/blog/${featuredBlogPost.data.slug}`
+              ><Button
+                classes="w-full"
+                text="Read the Manifesto"
+                size="lg"
+              /></a
+            >
           </div>
-          <div class="flex flex-col items-center gap-10">
+          <div
+            class="flex flex-col items-stretch sm:items-start gap-10 sm:gap-4"
+          >
             {
               blogPosts.map((post) => (
                 <BlogPost post={post.data} size="small" />

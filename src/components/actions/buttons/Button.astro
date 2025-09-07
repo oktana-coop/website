@@ -1,0 +1,26 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  text: string;
+  size?: 'sm' | 'md' | 'lg';
+  icon?: string;
+  classes?: string;
+}
+
+const { text, icon, size = 'md', classes } = Astro.props;
+
+const paddingClasses = {
+  sm: 'gap-x-1.5 px-2.5 py-1.5',
+  md: 'gap-x-1.5 px-3 py-2',
+  lg: 'gap-x-2 px-3.5 py-2.5',
+}[size];
+---
+
+<button
+  type="button"
+  class=`inline-flex items-center justify-center bg-black text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-pointer ${paddingClasses} ${classes ?? ''}`
+>
+  {icon && <Icon name={icon} aria-hidden="true" class="-ml-0.5 size-5" />}
+  {text}
+</button>
