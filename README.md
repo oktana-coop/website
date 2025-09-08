@@ -1,6 +1,6 @@
 # Oktana Website
 
-This is the codebase for the oktana.dev website (including the blog).
+This is the codebase for the [Oktana website](https://oktana.dev) (including the [blog](https://oktana.dev/blog)).
 
 Built using [Astro](https://astro.build/).
 
