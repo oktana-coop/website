@@ -1,13 +1,35 @@
 ---
 import { Image } from 'astro:assets';
-import githubIcon from '../assets/icons/fa-github.svg';
+import { Icon } from 'astro-icon/components';
+import oktanaLogo from '../assets/images/oktana-logo.svg';
 ---
 
-<footer class="flex flex-initial h-22 justify-center items-center px-6 py-4">
-  <a
-    href="https://github.com/oktana-coop/"
-    class="no-underline text-opacity-90"
-  >
-    <Image src={githubIcon} alt="GitHub" height="24" />
-  </a>
+<footer class="flex-initial flex flex-col px-6 py-4 mt-30 mb-20">
+  <div class="flex flex-col gap-5">
+    <div class="flex">
+      <div class="flex-auto flex gap-5 align-center">
+        <a
+          href="https://mastodon.social/@oktana"
+          class="no-underline text-opacity-90 flex items-center"
+        >
+          <Icon name="fa-mastodon" aria-hidden="true" class="-ml-0.5 size-5" />
+        </a>
+        <a
+          href="https://github.com/oktana-coop/"
+          class="no-underline text-opacity-90 flex items-center"
+        >
+          <Icon name="fa-github" aria-hidden="true" class="-ml-0.5 size-5" />
+        </a>
+      </div>
+      <div class="flex-initial">
+        <a href="/" class="no-underline">
+          <Image src={oktanaLogo} alt="Oktana" height="32" />
+        </a>
+      </div>
+    </div>
+    <div class="flex gap-6">
+      <a href="/blog">Blog</a>
+      <a href="mailto:team@oktana.dev">Contact us</a>
+    </div>
+  </div>
 </footer>
