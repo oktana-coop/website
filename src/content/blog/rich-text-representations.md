@@ -146,7 +146,7 @@ Note that, when translating the Automerge rich text model to a tree-like structu
 
 ### Automerge Spans
 
-Automerge offers the [Spans API](https://automerge.org/docs/documents/rich_text/#reading-spans 'Spans API') as an alternative of working with block markers and spans directly.
+Automerge offers the [Spans API](https://automerge.org/docs/reference/documents/rich_text/#the-spans-api 'Spans API') as an alternative of working with block markers and spans directly.
 
 Assuming we have the following Markdown representation:
 
