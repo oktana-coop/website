@@ -1,35 +1,176 @@
 ---
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+
 import oktanaLogo from '../assets/images/oktana-logo.svg';
+import Button from '../components/actions/buttons/Button.astro';
 ---
 
 <footer class="flex-initial flex flex-col px-6 py-4 mt-30 mb-20">
-  <div class="flex flex-col gap-5">
-    <div class="flex">
-      <div class="flex-auto flex gap-5 align-center">
-        <a
-          href="https://mastodon.social/@oktana"
-          class="no-underline text-opacity-90 flex items-center"
+  <div class="flex flex-col">
+    <div class="flex flex-col gap-6">
+      <div class="md:flex md:items-center md:justify-between">
+        <div>
+          <h3
+            class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold"
+          >
+            Want to stay up to date?
+          </h3>
+          <p class="mt-2 text-sm/6 text-black/75 dark:text-white/75">
+            Get the latest news for our collective
+          </p>
+        </div>
+        <form
+          class="mt-6 sm:flex sm:max-w-md md:mt-0 flex flex-col sm:flex-row items-stretch sm:items-center"
+          id="newsletter-form"
         >
-          <Icon name="fa-mastodon" aria-hidden="true" class="-ml-0.5 size-5" />
-        </a>
-        <a
-          href="https://github.com/oktana-coop/"
-          class="no-underline text-opacity-90 flex items-center"
-        >
-          <Icon name="fa-github" aria-hidden="true" class="-ml-0.5 size-5" />
-        </a>
+          <div>
+            <label for="email-address" class="sr-only">Email address</label>
+            <input
+              id="email-address"
+              type="email"
+              name="email-address"
+              required
+              placeholder="Enter your email"
+              autocomplete="email"
+              class="w-full min-w-0 bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus-visible:outline-black sm:w-56 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-neutral-700 dark:placeholder:text-neutral-500 dark:focus-visible:outline-white"
+            />
+          </div>
+          <div class="mt-4 sm:ml-4 sm:mt-0 sm:shrink-0">
+            <Button
+              type="submit"
+              classes="w-full sm:w-auto"
+              text="Subscribe"
+              size="sm"
+            />
+          </div>
+        </form>
       </div>
-      <div class="flex-initial">
-        <a href="/" class="no-underline">
-          <Image src={oktanaLogo} alt="Oktana" height="32" />
-        </a>
+      <div
+        id="newsletter-feedback-container"
+        class="hidden bg-green-100 dark:bg-green-500/10 dark:outline-green-500/20 dark:outline dark:outline-1 p-4"
+      >
+        <p
+          id="newsletter-feedback-paragraph"
+          class="text-sm text-black/85 dark:text-white/85"
+        >
+        </p>
       </div>
     </div>
-    <div class="flex gap-6">
-      <a href="/blog">Blog</a>
-      <a href="mailto:team@oktana.dev">Contact us</a>
+
+    <hr class="my-10 opacity-10 text-black dark:text-white" />
+
+    <div class="flex flex-col gap-5">
+      <div class="flex">
+        <div class="flex-auto flex gap-5 align-center">
+          <a
+            href="https://mastodon.social/@oktana"
+            class="no-underline text-opacity-90 flex items-center"
+          >
+            <Icon
+              name="fa-mastodon"
+              aria-hidden="true"
+              class="-ml-0.5 size-5"
+            />
+          </a>
+          <a
+            href="https://github.com/oktana-coop/"
+            class="no-underline text-opacity-90 flex items-center"
+          >
+            <Icon name="fa-github" aria-hidden="true" class="-ml-0.5 size-5" />
+          </a>
+        </div>
+        <div class="flex-initial">
+          <a href="/" class="no-underline">
+            <Image src={oktanaLogo} alt="Oktana" height="32" />
+          </a>
+        </div>
+      </div>
+      <div class="flex gap-6">
+        <a href="/blog">Blog</a>
+        <a href="mailto:team@oktana.dev">Contact us</a>
+      </div>
     </div>
   </div>
 </footer>
+
+<script>
+  import { type SubscribeResult } from '../lib/email-subscriptions/types';
+
+  const form = document.getElementById(
+    'newsletter-form'
+  ) as HTMLFormElement | null;
+  const newsletterFeedbackContainer = document.getElementById(
+    'newsletter-feedback-container'
+  ) as HTMLParagraphElement | null;
+  const newsletterFeedbackParagraph = document.getElementById(
+    'newsletter-feedback-paragraph'
+  ) as HTMLParagraphElement | null;
+  const submitButton = form?.querySelector<
+    HTMLButtonElement | HTMLInputElement
+  >('button[type="submit"], input[type="submit"]');
+
+  if (
+    !form ||
+    !submitButton ||
+    !newsletterFeedbackContainer ||
+    !newsletterFeedbackParagraph
+  ) {
+    throw new Error('Form or feedback element not found');
+  }
+
+  const feedbackContainerSuccessClasses =
+    'bg-green-100 dark:bg-green-500/10 dark:outline-green-500/20 dark:outline dark:outline-1 p-4';
+  const feedbackContainerErrorClasses =
+    'bg-red-100 dark:bg-red-500/10 dark:outline-red-500/20 dark:outline dark:outline-1 p-4';
+
+  form.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+
+    const emailInput = form.querySelector<HTMLInputElement>('#email-address');
+    if (!emailInput) {
+      newsletterFeedbackParagraph.textContent = 'Email input not found.';
+      newsletterFeedbackParagraph.className = 'mt-3 text-sm text-red-600';
+      newsletterFeedbackParagraph.classList.remove('hidden');
+      return;
+    }
+
+    const email = emailInput.value.trim();
+
+    // Disable submit button
+    submitButton.setAttribute('disabled', 'true');
+    submitButton.textContent = 'Subscribing...';
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const result: SubscribeResult = await response.json();
+
+      if (result.success) {
+        newsletterFeedbackContainer.className = feedbackContainerSuccessClasses;
+        newsletterFeedbackParagraph.textContent = 'Subscribed successfully!';
+        form.reset();
+      } else {
+        newsletterFeedbackContainer.className = feedbackContainerErrorClasses;
+        newsletterFeedbackParagraph.textContent =
+          result.error || 'Subscription failed.';
+      }
+    } catch (err) {
+      console.error('Subscribe request failed:', err);
+      newsletterFeedbackContainer.className = feedbackContainerErrorClasses;
+      newsletterFeedbackParagraph.textContent =
+        'Unexpected error. Please try again later.';
+    } finally {
+      submitButton.removeAttribute('disabled');
+      submitButton.textContent = 'Subscribe';
+
+      if (!newsletterFeedbackParagraph.textContent) {
+        newsletterFeedbackParagraph.classList.add('hidden');
+      }
+    }
+  });
+</script>

@@ -1,0 +1,62 @@
+---
+import { z } from 'zod';
+import {
+  unsubscribe,
+  unsubscribeInputSchema,
+  type UnsubscribeResult,
+} from '../lib/email-subscriptions';
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = false;
+
+const url = new URL(Astro.request.url);
+const tokenParam = url.searchParams.get('token');
+
+let result: UnsubscribeResult;
+
+try {
+  if (!tokenParam) {
+    throw new Error('Missing token');
+  }
+
+  const parsedInput = unsubscribeInputSchema.parse({ token: tokenParam });
+
+  result = await unsubscribe(parsedInput);
+} catch (err) {
+  if (err instanceof z.ZodError) {
+    result = { success: false, error: 'Validation error' };
+  } else {
+    console.error('Unsubscribe page error:', err);
+
+    result = {
+      success: false,
+      error:
+        (err as Error).message ||
+        'An error occured when trying to unsubscribe from our newsletter. Please contact us to resolve this.',
+    };
+  }
+}
+---
+
+<Layout
+  title="Fragments and Flows | Unsubscribe"
+  description="Unsubscribe from Fragments & Flows newsletter."
+>
+  <div class="flex-auto flex flex-col gap-6 md:gap-10 px-6">
+    <h1
+      class="text-black/90 dark:text-white/90 text-center sm:text-left text-3xl sm:text-4xl md:text-5xl font-serif font-bold"
+    >
+      {result.success ? 'Unsubscribe from Newsletter' : 'Unsubscribe Error'}
+    </h1>
+
+    <p
+      class="text-black/85 dark:text-white/85 text-base/7 md:text-lg/8 text-justify text-black font-light"
+    >
+      {
+        result.success
+          ? 'You were successfully unsubscribed from the newsletter.'
+          : '❌ There was an error in unsubscribing you from our newsletter. Please contact us to resolve this.'
+      }
+    </p>
+  </div>
+</Layout>
