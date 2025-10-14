@@ -29,6 +29,15 @@ Astro is opinionated in how you add routes, so it's good to familiarize with [fi
 
 Astro [Content Collections](https://docs.astro.build/en/guides/content-collections/) are used for defining and loading the blog posts.
 
+### Email Subscriptions & Database Connection
+
+In order for the subscribe/unscubscribe functionality to work, the following environment variables need to be set:
+
+- `DATABASE_URL`: The PostgreSQL database connection string
+- `DATABASE_SSL`: A boolean value that instructs whether to use SSL or not when connecting to the database
+
+These are already set in the deployed version of the app. In development, you'll need to create a `.env` file that includes these variables.
+
 ## Deployment
 
 The website is currently deployed to [Netlify](https://www.netlify.com/) using the relevant [Netlify Adapter](https://docs.astro.build/en/guides/integrations-guide/netlify/). Every time you push to the `main` branch, a fresh Netlify deployment is triggered (there is an integration between GitHub and Netlify).
