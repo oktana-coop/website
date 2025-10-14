@@ -1,5 +1,9 @@
 ---
 import { z } from 'zod';
+
+import NavigationBar from '../components/navigation/SmallNavigationBar.astro';
+import Footer from '../components/Footer.astro';
+import MainContainer from '../components/MainContainer.astro';
 import {
   unsubscribe,
   unsubscribeInputSchema,
@@ -42,21 +46,27 @@ try {
   title="Fragments and Flows | Unsubscribe"
   description="Unsubscribe from Fragments & Flows newsletter."
 >
-  <div class="flex-auto flex flex-col gap-6 md:gap-10 px-6">
-    <h1
-      class="text-black/90 dark:text-white/90 text-center sm:text-left text-3xl sm:text-4xl md:text-5xl font-serif font-bold"
-    >
-      {result.success ? 'Unsubscribe from Newsletter' : 'Unsubscribe Error'}
-    </h1>
+  <MainContainer>
+    <NavigationBar />
 
-    <p
-      class="text-black/85 dark:text-white/85 text-base/7 md:text-lg/8 text-justify text-black font-light"
-    >
-      {
-        result.success
-          ? 'You were successfully unsubscribed from the newsletter.'
-          : '❌ There was an error in unsubscribing you from our newsletter. Please contact us to resolve this.'
-      }
-    </p>
-  </div>
+    <div class="flex-auto flex flex-col gap-6 md:gap-10 px-6">
+      <h1
+        class="text-black/90 dark:text-white/90 text-center sm:text-left text-3xl sm:text-4xl md:text-5xl font-serif font-bold"
+      >
+        {result.success ? 'Unsubscribe from Newsletter' : 'Unsubscribe Error'}
+      </h1>
+
+      <p
+        class="text-black/85 dark:text-white/85 text-base/7 md:text-lg/8 text-justify text-black font-light"
+      >
+        {
+          result.success
+            ? 'You were successfully unsubscribed from the newsletter.'
+            : '❌ There was an error in unsubscribing you from our newsletter. Please contact us to resolve this.'
+        }
+      </p>
+    </div>
+
+    <Footer />
+  </MainContainer>
 </Layout>
