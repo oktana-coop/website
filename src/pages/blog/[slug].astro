@@ -1,11 +1,25 @@
 ---
+import { type GetStaticPaths } from 'astro';
 import { getCollection, render, type InferEntrySchema } from 'astro:content';
+
 import Layout from '../../layouts/Layout.astro';
 import NavigationBar from '../../components/navigation/SmallNavigationBar.astro';
 import Footer from '../../components/Footer.astro';
 import MainContainer from '../../components/MainContainer.astro';
 import DocumentStatusBadge from '../../components/DocumentStatusBadge.astro';
 import { getDisplayDate } from '../../models/post';
+
+export const prerender = true;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allGardenEntries = await getCollection('blog');
+
+  return allGardenEntries.map((post) => ({
+    params: {
+      slug: post.id,
+    },
+  }));
+};
 
 const { slug } = Astro.params;
 const posts = await getCollection('blog');
