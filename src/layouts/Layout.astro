@@ -75,6 +75,8 @@ const {
     --color-rose-950: #5f0030;
   }
 
+  @custom-variant dark (&:where(.dark, .dark *));
+
   html {
     font-family: 'Noto Sans', sans-serif;
     font-optical-sizing: auto;
