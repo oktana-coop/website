@@ -43,7 +43,7 @@ const { Content } = await render(postEntry);
           <p class="text-xs md:text-sm text-black/75">{getDisplayDate(post)}</p>
           {post.status === 'draft' && <DocumentStatusBadge text="Draft" />}
         </div>
-        <div>
+        <div class="prose-content">
           <Content />
         </div>
       </div>
@@ -52,3 +52,15 @@ const { Content } = await render(postEntry);
     <Footer />
   </MainContainer>
 </Layout>
+
+<style>
+  .prose-content :global(ul),
+  .prose-content :global(ol) {
+    margin-bottom: 1rem;
+  }
+
+  .prose-content :global(li > ul),
+  .prose-content :global(li > ol) {
+    margin-bottom: 0;
+  }
+</style>
