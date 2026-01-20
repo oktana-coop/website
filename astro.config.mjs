@@ -23,7 +23,7 @@ export default defineConfig({
           a: 'text-rose-600 hover:text-rose-800 wrap-anywhere',
           h1: 'text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-6',
           h2: 'text-xl sm:text-2xl md:text-3xl font-serif font-bold mb-6',
-          h3: 'text-lg md:text-[1.375rem] font-serif font-bold mb-4',
+          h3: 'text-lg md:text-[1.5rem] font-serif font-bold mb-4',
           h4: 'text-lg md:text-xl font-serif font-bold mb-2',
           h5: 'text-base md:text-lg font-serif font-bold mb-2',
           h6: 'text-sm md:text-base font-serif font-bold mb-2',
