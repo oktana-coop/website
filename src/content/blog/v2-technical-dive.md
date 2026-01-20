@@ -14,20 +14,13 @@ publishedAt: '2026-01-20'
 This document contains a technical dive into the technical stack, architecture, and challenges behind our new rich text editor, _[v2](https://v2editor.com 'v2')_. As discussed in the [editor manifesto](https://oktana.dev/blog/introducing-v2-editor/ 'editor manifesto'), v2 is built around the following principles:
 
 - User agency
-
 - Collaboration
   - Consensual & non-intrusive
-
   - Asynchronous by default
-
   - Real-time on demand
-
 - Interoperability
-
 - Composability
-
 - Longevity
-
 - Focused, non-distracted thinking
 
 In the sections to follow, we will try to describe *how* out technical stack works in coordination to fulfill them.
@@ -41,15 +34,12 @@ Although many people have a rough idea of what rich or formatted text is, there 
 As described in the [rich-text representations](https://oktana.dev/blog/rich-text-representations/ 'rich-text representations') document, we are working with a handful of foundational tools representing rich text, each approaching it from a different angle:
 
 - [Pandoc](https://pandoc.org 'Pandoc')\'s model aims at supporting conversion across various rich text document representations.
-
 - [ProseMirror](https://prosemirror.net 'ProseMirror')\'s model is centered around the use case of drafting rich text documents in a browser environment.
-
 - [Automerge](https://automerge.org/docs/reference/documents/rich-text/ 'Automerge')\'s model is good at managing rich text document versions and resolving conflicts that may arise as multiple users edit the same document, even in a live collaboration setting.
 
 The truth is that we desire *v2* to do all of the above well, leveraging the above foundational technologies, letting each one do what it excels at. Also, we want to add some capabilities, like having a diff engine that is **rich-text-native**, and not based on plain text like most systems we\'ve encountered. This means that we formalize in our type system the various diff operations. To make the latter more clear, consider the following example:
 
 - In a model that captures rich text semantics better, a heading level change is a [specific type of diff](https://github.com/oktana-coop/pandoc-diff/blob/c47b22b2109748c32318abba4881c010ee6a1da4/src/RichTextDiffOp.hs#L7 'specific type of diff'), where the type of the block remains `Heading`, but the level changes from `2` to `3` or similar.
-
 - The same change in a plain text diff engine is a text diff (e.g. `## Heading` → `### Heading`).
 
 Likewise, we strive for writing code that expresses mark changes (e.g. `strong` → `emphasis`) in its type system, rather than relying on plain text representations that leave this implicit.
@@ -66,9 +56,9 @@ Version control is at the core of _v2_, one of its defining features. As softwar
 
 #### Git and Automerge
 
-In order to develop v2, we experimented with two such systems, [Git](https://git-scm.com 'Git') and [Automerge](https://automerge.org 'Automerge'), both of which can support the asynchronous collaboration scenario. After lots of experimentation, we decided to abstract away the version control system, which allows decoupling the editor front-end and the diffing algorithm from it. Git is the more mature between the two and it is very powerful and battle-tested when it comes to branching and asynchronous collaboration, so in this version it is our preferred version control system. But switching to Automerge is a matter of configuration and implementation of some missing features (e.g. branching and explicit sync), and the most probable future is to make this option a user or project preference. Automerge is a really exciting project and its promise is to become the new filesystem of computing upon which local-first apps can be built [^3]. It is a [CRDT](https://crdt.tech 'CRDT') implementation and therefore guarantees that, even if users are concurrently editing in real time, it can safely merge the changes without corrupting the document. Importantly, this can also happen without the mediation of a central authority, so we can build live collaboration workflows using decentralized or peer-to-peer topologies. Even if live collaborative editing is not the focus for us at this point, building on top of Automerge allows us to leave the design open for implementing such workflows in a future version. A hybrid approach (using Git for the asynchronous collaboration part and Automerge to facilitate live collaboration sessions or enable resolving conflicts seamlessly) is also very probable. We are actually doing the latter already (offering a suggested merge conflict resolution via Automerge to conflicts Git finds).
+In order to develop v2, we experimented with two such systems, [Git](https://git-scm.com 'Git') and [Automerge](https://automerge.org 'Automerge'), both of which can support the asynchronous collaboration scenario. After lots of experimentation, we decided to abstract away the version control system, which allows decoupling the editor front-end and the diffing algorithm from it. Git is the more mature between the two and it is very powerful and battle-tested when it comes to branching and asynchronous collaboration, so in this version it is our preferred version control system. At this point, we should mention the great [isomorphic-git](https://isomorphic-git.org 'isomorphic-git') library, which is a JavaScript implementation of Git that works in both Node.js and browser environments. It is currently the way we are using Git in the application and it has been serving us very well.
 
-Last but not least, we should mention the great [isomorphic-git](https://isomorphic-git.org 'isomorphic-git') library, which is a JavaScript implementation of Git that works in both Node.js and browser environments. It is currently the way we are using Git in the application and it has been serving us very well.
+Although Git is our current default, switching to Automerge is a matter of configuration and implementation of some missing features (e.g. branching and explicit sync), and the most probable future is to make this option a user or project preference. Automerge is a really exciting project and its promise is to become the new filesystem of computing upon which local-first apps can be built [^3]. It is a [CRDT](https://crdt.tech 'CRDT') implementation and therefore guarantees that, even if users are concurrently editing in real time, it can safely merge the changes without corrupting the document. Importantly, this can also happen without the mediation of a central authority, so we can build live collaboration workflows using decentralized or peer-to-peer topologies. Even if live collaborative editing is not the focus for us at this point, building on top of Automerge allows us to leave the design open for implementing such workflows in a future version. A hybrid approach (using Git for the asynchronous collaboration part and Automerge to facilitate live collaboration sessions or enable resolving conflicts seamlessly) is also very probable. We are actually doing the latter already (offering a suggested merge conflict resolution via Automerge to conflicts Git finds).
 
 Briefly returning to the interoperability and data ownership principles, we believe it is important that _v2_ currently stores version control data in a `.git` folder inside the folder it manages, which is exactly what you would do if you use Git via the command line or any code editor like VS Code. This means that the user can edit their documents in _v2_ and then manage Git from the command line or another tool of their preference (or the opposite). Whatever they do with another tool is then reflected in what they see in _v2_. We have actually been practicing this ourselves as we are working with the editor in this early stage and implementing the version control features iteratively: if a Git feature was not yet supported in _v2_, we were going to the command line and performing the relevant action. And this is how these principles we discussed apply not only to the _current_ artifacts (Markdown files) being edited, but also extend to the version control (_historical_) artifacts.
 
@@ -77,7 +67,6 @@ Briefly returning to the interoperability and data ownership principles, we beli
 We wanted _v2_ to be distributed as a desktop app, and available for the major operating systems (macOS, Windows, Linux). A relevant decision was whether we would build native applications for these or if we would leverage a framework for cross-platform desktop apps. Although we understand that building native applications would enable us to build an app that more closely matches the operating system\'s ecosystem, building a cross-platform app with web technologies offered us two significant advantages:
 
 - Having to maintain a **single codebase** for all operating systems. Our team is small and maintaining multiple codebases would result in moving much slower.
-
 - Making the app **ready for the web**. _v2_\'s user interface is built using web technologies (HTML, CSS, JavaScript and WebAssembly) and, even if it\'s not visible since it\'s packaged as a desktop app, it follows best practices in terms of URL design. These properties make it much easier to ship a web app version like [VS Code for the Web](https://code.visualstudio.com/docs/setup/vscode-web 'VS Code for the Web') or build a complementary app that takes care of a part of the writing workflow (e.g. social collaboration) in a web environment.
 
 For the above reasons we opted to build _v2_ on top of [Electron](https://www.electronjs.org 'Electron'), which is a very mature framework for building cross-platform desktop apps with web technologies. Electron is stable, battle-tested, the team behind it has put lots of thought in aspects like [security](https://www.electronjs.org/docs/latest/tutorial/security 'security') and it also has a great ecosystem: [electron-builder](https://www.electron.build 'electron-builder') assists and guides you very well in managing the daunting task of building, publishing and updating the app for the various platforms. The VS Code team has published great resources regarding security and architecture, like the one for [process sandboxing](https://code.visualstudio.com/blogs/2022/11/28/vscode-sandbox 'process sandboxing'). There are, of course, interesting alternatives to Electron like [Tauri](https://tauri.app 'Tauri') which bring other languages like [Rust](https://rust-lang.org 'Rust') into the mix, which we would like to explore in the future.
@@ -91,9 +80,7 @@ _v2_ is programmatically integrated with [Pandoc](https://pandoc.org 'Pandoc'), 
 And this is exactly what we did: we built our Haskell code targeting WebAssembly, and exposing a command line interface (CLI). The latter gave us the following advantages:
 
 - Leveraging [WebAssembly System Interface (WASI)](https://wasi.dev 'WebAssembly System Interface (WASI)'), an effort of standardizing APIs for WebAssembly, including I/O. WASI has [experimental support in Node.js](https://nodejs.org/api/wasi.html 'experimental support in Node.js') and there is an npm module ([\@wasmer/wasi](https://www.npmjs.com/package/@wasmer/wasi#wasmer-wasi '@wasmer/wasi')) that can be used in a browser environment.
-
 - Avoiding mappings between text/string types across languages. The CLI treated everything (input and output) as a stream of text and this offered us a much-needed simplicity.
-
 - Allowing us to use and test the Haskell modules in isolation through the terminal.
 
 The reality of developing the solution was much more difficult and challenging than described in these lines, and we are really thankful to everyone contributing to [Haskell & WASM/WASI](https://gitlab.haskell.org/haskell-wasm/ghc-wasm-meta 'Haskell & WASM/WASI') bindings. But it works, and it does so with good performance: The application goes through the Haskell library continuously as the user types in the editor (with a small debounce time), primarily to convert the ProseMirror representation in the representation we use in the filesystem, currently Markdown. And this happens without any perceptible lag.
@@ -105,16 +92,11 @@ The reality of developing the solution was much more difficult and challenging t
 Packaging and updating a cross-platform desktop app is a complex task, one that can become very error prone if done manually. This is the reason we were looking for a good way to automate it. The solution we arrived at was a [GitHub CI workflow](https://github.com/oktana-coop/v2/blob/c93f8df2a7f44b5cddcd664ad55a01713ef1a919/.github/workflows/release.yml 'GitHub CI workflow') which we run from the GitHub Actions user interface when we want to release the app and roughly does the following:
 
 1.  Checks out the code.
-
 2.  Bumps the application version and commits the change.
-
 3.  Creates runners for each of the target operating systems (macOS, Linux, Windows), and in each of them:
     1.  Installs the app\'s dependencies.
-
     2.  Builds and packages the app in a way that is suitable for the corresponding operating system. This could include more than one build (for example, in macOS, it builds artifacts for both ARM and older Intel architectures. We are very thankful of the team behind [electron-builder](https://www.electron.build 'electron-builder'), the great work of whom really facilitates this part.
-
 4.  Organizes the build artifacts by operating systems and creates a GitHub release with them. A GitHub release contains these artifacts in these assets, and we can link to them in the application website. We are dynamically fetching the latest release and its artifacts in _v2_\'s website.
-
 5.  If an error happened in any of the above, there is an action in the end that reverts the version bump in the codebase.
 
 The above workflow is used for some months now and resulted in easy and automated application releases as it includes very few points that require human interaction. It is important to mention that GitHub does not charge public repositories for using their CI runners, which is a very helpful and reduces our costs.
