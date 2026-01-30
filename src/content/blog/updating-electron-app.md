@@ -29,13 +29,15 @@ Electron follows a multi-process architecture, so familiarity with Electron\'s [
 
 Setting the publish provider is required for both publishing and update to function properly. This is done in [electron-builder configuration](https://www.electron.build/builder-util-runtime.interface.githuboptions 'electron-builder configuration') (in our case this currently lives in `package.json`) like this:
 
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "oktana-coop",
-        "repo": "v2"
-      }
-    ]
+```json
+"publish": [
+  {
+    "provider": "github",
+    "owner": "oktana-coop",
+    "repo": "v2"
+  }
+]
+```
 
 ### Extra Configuration to Test Updates in Dev Mode
 
@@ -45,9 +47,11 @@ In order to test and debug updates in development mode, the following config is 
 
 - A `dev-app-update.yml` file with the publish configuration in YAML format in the project root:
 
-      owner: oktana-coop
-      repo: v2
-      provider: github
+```yaml
+owner: oktana-coop
+repo: v2
+provider: github
+```
 
 ## Publish Packaged App to GitHub
 
@@ -68,18 +72,22 @@ An example release that contains these files is [this one](https://github.com/ok
 
 First, import what\'s needed from `electron-updater`:
 
-    import { autoUpdater } from 'electron-updater';
+```typescript
+import { autoUpdater } from 'electron-updater';
+```
 
 Then, configure it as you wish. An example configuration:
 
-    import electronLogger from 'electron-log/main';
+```typescript
+import electronLogger from 'electron-log/main';
 
-    autoUpdater.forceDevUpdateConfig = true;
-    autoUpdater.logger = electronLogger;
+autoUpdater.forceDevUpdateConfig = true;
+autoUpdater.logger = electronLogger;
 
-    // When set to false, the update download will be triggered through the API
-    autoUpdater.autoDownload = false;
-    autoUpdater.allowDowngrade = false;
+// When set to false, the update download will be triggered through the API
+autoUpdater.autoDownload = false;
+autoUpdater.allowDowngrade = false;
+```
 
 ## Register electron-updater and IPC Events in the Main Process
 
@@ -101,41 +109,47 @@ The user interacts with the app within an update workflow. This means that the _
 
 - The user prompts the app to check for an update. In the _main_ process we would have to do something like:
 
-      ipcMain.handle('check-for-update', async () => {
-        await autoUpdater.checkForUpdatesAndNotify()
-      });
+```typescript
+ipcMain.handle('check-for-update', async () => {
+  await autoUpdater.checkForUpdatesAndNotify();
+});
+```
 
 - The user prompts the app to download the update. In the _main_ process we would have to do something like:
 
-      ipcMain.handle('download-update', (event: Electron.IpcMainInvokeEvent) => {
-        startDownload(
-          (error, progressInfo) => {
-            // progress callback
-          },
-          () => {
-            // complete callback
-          }
-        );
-      });
+```typescript
+ipcMain.handle('download-update', (event: Electron.IpcMainInvokeEvent) => {
+  startDownload(
+    (error, progressInfo) => {
+      // progress callback
+    },
+    () => {
+      // complete callback
+    }
+  );
+});
 
-      const startDownload = (
-        callback: (error: Error | null, info: ProgressInfo | null) => void,
-        complete: (event: UpdateDownloadedEvent) => void
-      ) => {
-        autoUpdater.on('download-progress', (info: ProgressInfo) =>
-          // progress callback
-          callback(null, info)
-        );
-        autoUpdater.on('error', (error: Error) => callback(error, null));
-        autoUpdater.on('update-downloaded', complete);
-        autoUpdater.downloadUpdate();
-      };
+const startDownload = (
+  callback: (error: Error | null, info: ProgressInfo | null) => void,
+  complete: (event: UpdateDownloadedEvent) => void
+) => {
+  autoUpdater.on('download-progress', (info: ProgressInfo) =>
+    // progress callback
+    callback(null, info)
+  );
+  autoUpdater.on('error', (error: Error) => callback(error, null));
+  autoUpdater.on('update-downloaded', complete);
+  autoUpdater.downloadUpdate();
+};
+```
 
 - The user prompts the app to quit and install the update. In the _main_ process we would have to do something like:
 
-      ipcMain.handle('restart-to-install-update', () => {
-        autoUpdater.quitAndInstall(false, true);
-      });
+```typescript
+ipcMain.handle('restart-to-install-update', () => {
+  autoUpdater.quitAndInstall(false, true);
+});
+```
 
 ## Check for an Update on Application Start
 
