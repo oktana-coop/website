@@ -1,7 +1,7 @@
 ---
 slug: updating-electron-app
 title: 'Updating an Electron App hosted on GitHub with electron-updater'
-description: 'Cross-platform updates in an Electron app using electron-updater and GitHub provider.'
+description: 'A guide on how to implement updates in an Electron application, focusing on the GitHub publishing provider. Based on how cross-platform updates are implemented in our v2 editor.'
 image: 'https://oktana.dev/v2-1200x630.png'
 status: 'published'
 createdAt: '2026-01-30'
