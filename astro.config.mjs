@@ -31,6 +31,13 @@ export default defineConfig({
           ol: 'list-decimal pl-6',
           li: 'text-base/7 md:text-lg/9 text-left sm:text-justify',
           pre: 'p-4 font-mono bg-black/5 overflow-x-auto mb-6',
+          table:
+            'w-full border-collapse mb-6 overflow-x-auto text-sm md:text-base',
+          thead: 'bg-black/5 dark:bg-white/10',
+          th: 'border border-black/10 dark:border-white/10 px-4 py-2 text-left font-semibold text-black/90 dark:text-white/90',
+          td: 'border border-black/10 dark:border-white/10 px-4 py-2 text-black/80 dark:text-white/80',
+          tbody: 'bg-white dark:bg-transparent',
+          'tr:nth-child(even)': 'bg-black/5 dark:bg-white/5', // striped rows
         },
       ],
     ],
