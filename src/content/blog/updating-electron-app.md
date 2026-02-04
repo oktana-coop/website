@@ -20,6 +20,11 @@ From a user experience point of view, the following goals are assumed:
 4.  The user interface can display progress information about the update.
 5.  When the update finishes, the user gets the option to install the update and restart the app.
 
+<video controls preload="metadata" class="w-full my-6">
+  <source src="/assets/updating-electron-app/update-ui-ux.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 `electron-updater` is part of the [electron-builder](https://www.electron.build 'electron-builder') solution for packaging, distributing and updating Electron apps.
 
 Electron follows a multi-process architecture, so familiarity with Electron\'s [Inter-Process Communication (IPC)](https://www.electronjs.org/docs/latest/tutorial/ipc 'Inter-Process Communication (IPC)') is required, especially with the [Renderer-to-Main](https://www.electronjs.org/docs/latest/tutorial/ipc#pattern-2-renderer-to-main-two-way 'Renderer-to-Main') pattern. `electron-updater` runs in Electron\'s _main_ process and IPC is needed to translating user interactions (e.g. clicking on a command palette action or a notifications) happening in the _renderer_ process to commands sent to the updater module.
