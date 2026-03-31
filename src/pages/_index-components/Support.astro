@@ -1,5 +1,6 @@
 ---
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
+import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import SectionHeading from '../../components/typography/SectionHeading.astro';
 
 const textClasses =
@@ -44,36 +45,58 @@ const textClasses =
         initiatives.
       </p>
     </div>
-    <h2
-      class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center"
-    >
-      Choose how you'd like to contribute
-    </h2>
-    <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
-      <a
-        href="https://opencollective.com/oktana"
-        target="_blank"
-        rel="noopener"
+    <div class="flex flex-col justify-center items-center gap-4 md:gap-8">
+      <h2
+        class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center"
       >
-        <OutlineButton
-          icon="open-collective"
-          text="Open Collective"
-          size="lg"
-          classes="w-full sm:w-auto"
-        />
-      </a>
-      <a
-        href="https://github.com/sponsors/oktana-coop"
-        target="_blank"
-        rel="noopener"
-      >
-        <OutlineButton
-          icon="fa-github"
-          text="GitHub Sponsors"
-          size="lg"
-          classes="w-full sm:w-auto"
-        />
-      </a>
+        Choose how you'd like to contribute
+      </h2>
+      <div class="flex flex-col justify-center gap-4 w-full sm:max-w-sm">
+        <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
+          <a
+            href="https://donate.stripe.com/6oU5kC51hfj03wF7hzfQI00"
+            target="_blank"
+            rel="noopener"
+            class="flex-auto"
+          >
+            <SolidButton
+              icon="fa-stripe"
+              text="Support Directly"
+              size="lg"
+              classes="w-full"
+            />
+          </a>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
+          <a
+            href="https://opencollective.com/oktana"
+            target="_blank"
+            rel="noopener"
+            class="flex-auto"
+          >
+            <OutlineButton
+              icon="open-collective"
+              text="Open Collective"
+              size="sm"
+              classes="w-full"
+            />
+          </a>
+          <a
+            href="https://github.com/sponsors/oktana-coop"
+            target="_blank"
+            rel="noopener"
+            class="flex-auto"
+          >
+            <OutlineButton
+              icon="fa-github"
+              text="GitHub Sponsors"
+              size="sm"
+              classes="w-full"
+            />
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
