@@ -2,9 +2,18 @@
 import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
 import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 import SectionHeading from '../../components/typography/SectionHeading.astro';
+import RadioSmallCard from '../../components/inputs/RadioSmallCard.astro';
 
 const textClasses =
   'text-sm/6 sm:text-base/7 md:text-lg/8 m-0 font-light text-left sm:text-justify';
+
+const tiers = [
+  { amount: 5, link: 'https://donate.stripe.com/00w9AS8dt8UC1ox31jfQI01' },
+  { amount: 10, link: 'https://donate.stripe.com/5kQaEWfFV8UC7MV45nfQI02' },
+  { amount: 25, link: 'https://donate.stripe.com/eVq4gyfFV3Ai8QZ6dvfQI03' },
+];
+
+const defaultTier = tiers[1];
 ---
 
 <div id="support" class="flex flex-col gap-10">
@@ -45,58 +54,119 @@ const textClasses =
         initiatives.
       </p>
     </div>
-    <div class="flex flex-col justify-center items-center gap-4 md:gap-8">
+    <div class="flex flex-col justify-center items-center gap-4">
       <h2
         class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center"
       >
         Choose how you'd like to contribute
       </h2>
       <div class="flex flex-col justify-center gap-4 w-full sm:max-w-sm">
+        <p class="text-xs/6 text-black/54 text-center">
+          Steady funding keeps our work independent and sustainable.
+        </p>
+
+        <fieldset>
+          <legend class="sr-only">Monthly support amount</legend>
+          <div class="tier-picker grid grid-cols-3 gap-3">
+            <!--
+              The checked property just sets the default. The Tailwind has-checked:
+              variant uses the CSS :checked pseudo-class under the hood,
+              which tracks the DOM property, not the HTML attribute.
+            -->
+            {
+              tiers.map((tier) => (
+                <RadioSmallCard
+                  value={tier.link}
+                  label={`€${tier.amount}/month`}
+                  group="support-tier"
+                  checked={tier.link === defaultTier.link}
+                />
+              ))
+            }
+          </div>
+        </fieldset>
+
         <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
           <a
-            href="https://donate.stripe.com/6oU5kC51hfj03wF7hzfQI00"
+            id="recurring-support-link"
+            href={defaultTier.link}
             target="_blank"
             rel="noopener"
             class="flex-auto"
           >
             <SolidButton
               icon="fa-stripe"
-              text="Support Directly"
+              text="Become a monthly supporter"
               size="lg"
               classes="w-full"
             />
           </a>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:justify-between gap-4">
-          <a
-            href="https://opencollective.com/oktana"
-            target="_blank"
-            rel="noopener"
-            class="flex-auto"
-          >
-            <OutlineButton
-              icon="open-collective"
-              text="Open Collective"
-              size="sm"
-              classes="w-full"
-            />
-          </a>
-          <a
-            href="https://github.com/sponsors/oktana-coop"
-            target="_blank"
-            rel="noopener"
-            class="flex-auto"
-          >
-            <OutlineButton
-              icon="fa-github"
-              text="GitHub Sponsors"
-              size="sm"
-              classes="w-full"
-            />
-          </a>
+        <div class="flex flex-col gap-4">
+          <p class="text-xs/6 text-black/54 text-center">
+            Other ways to contribute
+          </p>
+          <div class="flex flex-col gap-4">
+            <a
+              href="https://donate.stripe.com/6oU5kC51hfj03wF7hzfQI00"
+              target="_blank"
+              rel="noopener"
+              class="flex-auto"
+            >
+              <OutlineButton
+                icon="fa-stripe"
+                text="One-time contribution"
+                size="sm"
+                classes="w-full"
+              />
+            </a>
+            <a
+              href="https://opencollective.com/oktana"
+              target="_blank"
+              rel="noopener"
+              class="flex-auto"
+            >
+              <OutlineButton
+                icon="open-collective"
+                text="Open Collective"
+                size="sm"
+                classes="w-full"
+              />
+            </a>
+            <a
+              href="https://github.com/sponsors/oktana-coop"
+              target="_blank"
+              rel="noopener"
+              class="flex-auto"
+            >
+              <OutlineButton
+                icon="fa-github"
+                text="GitHub Sponsors"
+                size="sm"
+                classes="w-full"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  const radios = document.querySelectorAll<HTMLInputElement>(
+    '.tier-picker input[type="radio"]'
+  );
+  const recurringSupportLink = document.getElementById(
+    'recurring-support-link'
+  ) as HTMLAnchorElement | null;
+
+  if (recurringSupportLink) {
+    radios.forEach((radio) => {
+      radio.addEventListener('change', () => {
+        recurringSupportLink.href = radio.value;
+      });
+    });
+  }
+</script>
