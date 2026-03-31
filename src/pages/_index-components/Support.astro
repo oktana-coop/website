@@ -1,0 +1,79 @@
+---
+import OutlineButton from '../../components/actions/buttons/OutlineButton.astro';
+import SectionHeading from '../../components/typography/SectionHeading.astro';
+
+const textClasses =
+  'text-sm/6 sm:text-base/7 md:text-lg/8 m-0 font-light text-left sm:text-justify';
+---
+
+<div id="why-support" class="flex flex-col gap-10">
+  <div class="flex flex-col gap-4 md:gap-8">
+    <SectionHeading text="Support our Work" />
+    <div class="flex flex-col gap-4">
+      <p class={textClasses}>
+        We want to create tools that enhance our capacity for thinking and
+        collaborating, tools that are oriented towards commons and treat
+        knowledge as such. <a
+          href="https://v2editor.com"
+          class="text-rose-600 hover:text-rose-800"
+          target="_blank"
+          rel="noopener"><em>v2</em></a
+        > is our first product manifesting this desire: it is a local-first editor
+        with version control capabilities which gives you full agency over your data
+        and is interoperable and composable with other tools. These properties, along
+        with the fact that its source code is open, make <em>v2</em> resistant to
+        becoming a commodity, which is something expected and desirable for us.
+      </p>
+      <p class={textClasses}>
+        Alongside building tools that embody different values, we also want to
+        analyze the society we are part of, with a view of changing it and
+        weaving emancipatory alternatives. So part of our work is reflecting on
+        how we work and produce, writing <a
+          href="/blog"
+          class="text-rose-600 hover:text-rose-800">essays</a
+        > whose themes span political economy, technology and philosophy.
+      </p>
+      <p class={textClasses}>
+        If you like our work and vision, please consider supporting us
+        financially so that we can do more of this. We statutorily do not accept
+        venture capital investment so that we stay independent and our resources
+        are currently limited and based on personal savings from previous work
+        we've undertaken. It would be amazing for us to reach a point where our
+        work is community-funded as we plan to de-commodify knowledge production
+        as much as possible and organize with like-minded people and
+        initiatives.
+      </p>
+    </div>
+    <h2
+      class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center"
+    >
+      Choose how you'd like to contribute
+    </h2>
+    <div class="flex flex-col sm:flex-row sm:justify-center gap-6">
+      <a
+        href="https://opencollective.com/oktana"
+        target="_blank"
+        rel="noopener"
+      >
+        <OutlineButton
+          icon="open-collective"
+          text="Open Collective"
+          size="lg"
+          classes="w-full sm:w-auto"
+        />
+      </a>
+      <a
+        href="https://github.com/sponsors/oktana-coop"
+        target="_blank"
+        rel="noopener"
+      >
+        <OutlineButton
+          icon="fa-github"
+          text="GitHub Sponsors"
+          size="lg"
+          classes="w-full sm:w-auto"
+        />
+      </a>
+    </div>
+  </div>
+</div>

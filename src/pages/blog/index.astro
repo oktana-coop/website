@@ -6,7 +6,7 @@ import Footer from '../../components/Footer.astro';
 import MainContainer from '../../components/MainContainer.astro';
 import { type Post, isPublishedPost } from '../../models/post';
 import BlogPost from '../../components/BlogPost.astro';
-import Button from '../../components/actions/buttons/Button.astro';
+import SolidButton from '../../components/actions/buttons/SolidButton.astro';
 
 const allBlogPostEntries = await getCollection('blog');
 
@@ -50,7 +50,7 @@ const upcomingPosts = allBlogPostEntries
             
           </div>
           <a href="/blog/published/1">
-            <Button classes="w-full sm:w-auto" text="See all Published Posts" size="lg" />
+            <SolidButton classes="w-full sm:w-auto" text="See all Published Posts" size="lg" />
           </a>
         )
       }
@@ -73,7 +73,7 @@ const upcomingPosts = allBlogPostEntries
               ))}
             </div>
             <a href="/blog/unpublished/1">
-              <Button classes="w-full sm:w-auto" text="See all Upcoming Posts" size="lg" />
+              <SolidButton classes="w-full sm:w-auto" text="See all Upcoming Posts" size="lg" />
             </a>
           </div>
         )

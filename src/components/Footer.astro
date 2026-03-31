@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 import oktanaLogo from '../assets/images/oktana-logo.svg';
-import Button from '../components/actions/buttons/Button.astro';
+import SolidButton from '../components/actions/buttons/SolidButton.astro';
 ---
 
 <footer class="flex-initial flex flex-col px-6 py-4 mt-30 mb-20">
@@ -37,7 +37,7 @@ import Button from '../components/actions/buttons/Button.astro';
             />
           </div>
           <div class="mt-4 sm:ml-4 sm:mt-0 sm:shrink-0">
-            <Button
+            <SolidButton
               type="submit"
               classes="w-full sm:w-auto"
               text="Subscribe"

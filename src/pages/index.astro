@@ -5,10 +5,12 @@ import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import NavigationBar from '../components/navigation/BigNavigationBar.astro';
 import MainContainer from '../components/MainContainer.astro';
+import SectionHeading from '../components/typography/SectionHeading.astro';
 import Footer from '../components/Footer.astro';
 import HeroHighlight from './_index-components/HeroHighlight.astro';
+import Support from './_index-components/Support.astro';
 import BlogPost from '../components/BlogPost.astro';
-import Button from '../components/actions/buttons/Button.astro';
+import SolidButton from '../components/actions/buttons/SolidButton.astro';
 import v2Logo from '../assets/images/v2-logo-light.svg';
 import v2Screenshot from '../assets/images/v2-screenshot.png';
 
@@ -48,11 +50,7 @@ if (blogPosts.length !== 3) {
         </div>
       </div>
       <div class="flex flex-col items-center gap-8">
-        <h2
-          class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none text-center"
-        >
-          Products
-        </h2>
+        <SectionHeading text="Products" />
         <div class="flex flex-col gap-10">
           <div class="flex flex-col items-center gap-6">
             <a href="https://v2editor.com">
@@ -74,17 +72,13 @@ if (blogPosts.length !== 3) {
       </div>
       <div class="flex flex-col items-center gap-8">
         <a href=`/blog`>
-          <h2
-            class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold leading-none text-center"
-          >
-            Writing
-          </h2>
+          <SectionHeading text="Writing" />
         </a>
         <div class="flex flex-col lg:flex-row gap-10">
           <div class="flex flex-col items-stretch sm:items-start gap-4">
             <BlogPost post={featuredBlogPost.data} size="normal" />
             <a href=`/blog/${featuredBlogPost.data.slug}`
-              ><Button
+              ><SolidButton
                 classes="w-full"
                 text="Read the Manifesto"
                 size="lg"
@@ -100,11 +94,17 @@ if (blogPosts.length !== 3) {
               ))
             }
             <a href=`/blog`
-              ><Button classes="w-full" text="More Blog Posts" size="lg" /></a
+              ><SolidButton
+                classes="w-full"
+                text="More Blog Posts"
+                size="lg"
+              /></a
             >
           </div>
         </div>
       </div>
+
+      <Support />
     </div>
 
     <Footer />
