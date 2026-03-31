@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 
 interface Props {
   text: string;
+  subtitle?: string;
   size?: 'sm' | 'md' | 'lg';
   icon?: string;
   classes?: string;
@@ -10,7 +11,7 @@ interface Props {
   id?: string;
 }
 
-const { text, icon, size = 'md', classes, type = 'button', id } = Astro.props;
+const { text, subtitle, icon, size = 'md', classes, type = 'button', id } = Astro.props;
 
 const paddingClasses = {
   sm: 'gap-x-1.5 px-2.5 py-1.5',
@@ -31,5 +32,8 @@ const paddingClasses = {
       </span>
     )
   }
-  <span id={id && `${id}-text`}>{text}</span>
+  <span class={`flex flex-col ${subtitle ? 'items-start' : 'items-center'}`}>
+    <span id={id && `${id}-text`}>{text}</span>
+    {subtitle && <span class="text-xs font-normal opacity-75">{subtitle}</span>}
+  </span>
 </button>
