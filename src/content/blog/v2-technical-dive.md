@@ -11,7 +11,7 @@ publishedAt: '2026-01-20'
 
 # v2 Technical Dive
 
-This document contains a technical dive into the technical stack, architecture, and challenges behind our new rich text editor, _[v2](https://v2editor.com 'v2')_. As discussed in the [editor manifesto](https://oktana.dev/blog/introducing-v2-editor/ 'editor manifesto'), v2 is built around the following principles:
+This document contains a technical dive into the technical stack, architecture, and challenges behind our new rich text editor, _[v2](https://v2editor.com 'v2')_. As discussed in the [editor manifesto](https://oktana.dev/blog/v2-manifesto/ 'editor manifesto'), v2 is built around the following principles:
 
 - User agency
 - Collaboration

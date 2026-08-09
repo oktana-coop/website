@@ -14,7 +14,7 @@ import SolidButton from '../components/actions/buttons/SolidButton.astro';
 import v2Logo from '../assets/images/v2-logo-light.svg';
 import v2Screenshot from '../assets/images/v2-screenshot.png';
 
-const featuredBlogPost = await getEntry('blog', 'introducing-v2-editor');
+const featuredBlogPost = await getEntry('blog', 'v2-manifesto');
 if (!featuredBlogPost) {
   throw new Error('Featured blog post not found');
 }
