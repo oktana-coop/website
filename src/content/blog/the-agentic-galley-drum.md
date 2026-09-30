@@ -4,7 +4,7 @@ title: 'The Agentic Galley Drum'
 description: 'The primary change LLM agentic workflows will bring is in the rhythm of labor.'
 status: 'draft'
 createdAt: '2026-07-03'
-updatedAt: '2025-07-03'
+updatedAt: '2026-07-03'
 ---
 
 # The Agentic Galley Drum
