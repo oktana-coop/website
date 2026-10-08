@@ -23,25 +23,31 @@ const defaultTier = tiers[1];
       <p class={textClasses}>
         We want to create tools that enhance our capacity for thinking and
         collaborating, tools that are oriented towards commons and treat
-        knowledge as such. <a
+        knowledge as such.{' '}
+        <a
           href="https://v2editor.com"
           class="text-rose-600 hover:text-rose-800"
           target="_blank"
-          rel="noopener"><em>v2</em></a
-        > is our first product manifesting this desire: it is a local-first editor
-        with version control capabilities which gives you full agency over your data
-        and is interoperable and composable with other tools. These properties, along
-        with the fact that its source code is open, make <em>v2</em> resistant to
-        becoming a commodity, which is something expected and desirable for us.
+          rel="noopener"
+        >
+          <em>v2</em>
+        </a>{' '}
+        is our first product manifesting this desire: it is a local-first editor
+        with version control capabilities which gives you full agency over your
+        data and is interoperable and composable with other tools. These
+        properties, along with the fact that its source code is open, make{' '}
+        <em>v2</em> resistant to becoming a commodity, which is something
+        expected and desirable for us.
       </p>
       <p class={textClasses}>
         Alongside building tools that embody different values, we also want to
         analyze the society we are part of, with a view of changing it and
         weaving emancipatory alternatives. So part of our work is reflecting on
-        how we work and produce, writing <a
-          href="/blog"
-          class="text-rose-600 hover:text-rose-800">essays</a
-        > whose themes span political economy, technology and philosophy.
+        how we work and produce, writing{' '}
+        <a href="/blog" class="text-rose-600 hover:text-rose-800">
+          essays
+        </a>{' '}
+        whose themes span political economy, technology and philosophy.
       </p>
       <p class={textClasses}>
         If you like our work and vision, please consider supporting us
@@ -55,9 +61,7 @@ const defaultTier = tiers[1];
       </p>
     </div>
     <div class="flex flex-col justify-center items-center gap-4">
-      <h2
-        class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center"
-      >
+      <h2 class="text-lg md:text-xl text-black/85 dark:text-white/85 font-serif font-bold text-center">
         Choose how you'd like to contribute
       </h2>
       <div class="flex flex-col justify-center gap-4 w-full sm:max-w-sm">
@@ -73,16 +77,14 @@ const defaultTier = tiers[1];
               variant uses the CSS :checked pseudo-class under the hood,
               which tracks the DOM property, not the HTML attribute.
             -->
-            {
-              tiers.map((tier) => (
-                <RadioSmallCard
-                  value={tier.link}
-                  label={`€${tier.amount}/month`}
-                  group="support-tier"
-                  checked={tier.link === defaultTier.link}
-                />
-              ))
-            }
+            {tiers.map((tier) => (
+              <RadioSmallCard
+                value={tier.link}
+                label={`€${tier.amount}/month`}
+                group="support-tier"
+                checked={tier.link === defaultTier.link}
+              />
+            ))}
           </div>
         </fieldset>
 

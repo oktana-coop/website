@@ -36,9 +36,7 @@ if (blogPosts.length !== 3) {
     <div class="flex flex-col align-center px-6 gap-10 sm:gap-30 md:gap-40">
       <div class="flex flex-auto flex-col justify-around h-[90vh] sm:h-[75vh]">
         <div class="flex justify-center sm:justify-end py-0">
-          <p
-            class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center sm:text-right m-0 font-light max-w-[630px]"
-          >
+          <p class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center sm:text-right m-0 font-light max-w-[630px]">
             We are a small, democratically-governed collective specialized in
             building software products. We aspire to be one of those spaces
             where autonomous people organize themselves and care for each other,
@@ -56,9 +54,7 @@ if (blogPosts.length !== 3) {
             <a href="https://v2editor.com">
               <Image src={v2Logo} alt="v2" height="72" />
             </a>
-            <p
-              class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center sm:text-justify font-light"
-            >
+            <p class="text-base/6 sm:text-lg/7 md:text-xl/8 text-center sm:text-justify font-light">
               A local-first editor with Git-style version control, true privacy,
               and complete control over your data
             </p>
@@ -77,29 +73,21 @@ if (blogPosts.length !== 3) {
         <div class="flex flex-col lg:flex-row gap-10">
           <div class="flex flex-col items-stretch sm:items-start gap-4">
             <BlogPost post={featuredBlogPost.data} size="normal" />
-            <a href=`/blog/${featuredBlogPost.data.slug}`
-              ><SolidButton
+            <a href=`/blog/${featuredBlogPost.data.slug}`>
+              <SolidButton
                 classes="w-full"
                 text="Read the Manifesto"
                 size="lg"
-              /></a
-            >
+              />
+            </a>
           </div>
-          <div
-            class="flex flex-col items-stretch sm:items-start gap-10 sm:gap-4"
-          >
-            {
-              blogPosts.map((post) => (
-                <BlogPost post={post.data} size="small" />
-              ))
-            }
-            <a href=`/blog`
-              ><SolidButton
-                classes="w-full"
-                text="More Blog Posts"
-                size="lg"
-              /></a
-            >
+          <div class="flex flex-col items-stretch sm:items-start gap-10 sm:gap-4">
+            {blogPosts.map((post) => (
+              <BlogPost post={post.data} size="small" />
+            ))}
+            <a href=`/blog`>
+              <SolidButton classes="w-full" text="More Blog Posts" size="lg" />
+            </a>
           </div>
         </div>
       </div>

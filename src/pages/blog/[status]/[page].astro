@@ -49,26 +49,20 @@ const { status } = Astro.params as { status: string };
     <NavigationBar />
 
     <div class="flex-auto flex flex-col gap-6 md:gap-8 px-6">
-      <h1
-        class="text-center sm:text-left text-4xl sm:text-5xl md:text-6xl font-serif font-bold"
-      >
+      <h1 class="text-center sm:text-left text-4xl sm:text-5xl md:text-6xl font-serif font-bold">
         Blog
       </h1>
 
       <div class="flex flex-col gap-16">
-        {
-          page.data.map((postEntry) => (
-            <BlogPost post={postEntry.data} size="normal" />
-          ))
-        }
+        {page.data.map((postEntry) => (
+          <BlogPost post={postEntry.data} size="normal" />
+        ))}
       </div>
     </div>
 
-    {
-      page.lastPage > 1 && (
-        <PaginationControls page={page} basePath={`/blog/${status}`} />
-      )
-    }
+    {page.lastPage > 1 && (
+      <PaginationControls page={page} basePath={`/blog/${status}`} />
+    )}
 
     <Footer />
   </MainContainer>

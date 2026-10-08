@@ -35,49 +35,50 @@ const upcomingPosts = allBlogPostEntries
     <NavigationBar />
 
     <div class="flex-auto flex flex-col align-stretch sm:align-start gap-6 md:gap-8 px-6">
-      <h1
-        class="text-center sm:text-left text-4xl sm:text-5xl md:text-6xl font-serif font-bold"
-      >
+      <h1 class="text-center sm:text-left text-4xl sm:text-5xl md:text-6xl font-serif font-bold">
         Blog
       </h1>
 
-      {
-        publishedBlogPosts.length > 0 && (
+      {publishedBlogPosts.length > 0 && (
+        <>
           <div class="flex flex-col gap-16">
             {publishedBlogPosts.map((post) => (
               <BlogPost post={post} size="normal" />
             ))}
-            
           </div>
           <a href="/blog/published/1">
-            <SolidButton classes="w-full sm:w-auto" text="See all Published Posts" size="lg" />
+            <SolidButton
+              classes="w-full sm:w-auto"
+              text="See all Published Posts"
+              size="lg"
+            />
           </a>
-        )
-      }
+        </>
+      )}
 
-      {
-        publishedBlogPosts.length > 0 && upcomingPosts.length > 0 && (
-          <hr class="my-14 opacity-10" />
-        )
-      }
+      {publishedBlogPosts.length > 0 && upcomingPosts.length > 0 && (
+        <hr class="my-14 opacity-10" />
+      )}
 
-      {
-        upcomingPosts.length > 0 && (
-          <div class="flex flex-col align-stretch sm:align-start gap-6 md:gap-8">
-            <h2 class="text-center sm:text-left text-2xl sm:text-3xl md:text-4xl font-serif font-bold">
-              Coming Soon
-            </h2>
-            <div class="flex flex-col gap-16">
-              {upcomingPosts.map((post) => (
-                <BlogPost post={post} size="normal" />
-              ))}
-            </div>
-            <a href="/blog/unpublished/1">
-              <SolidButton classes="w-full sm:w-auto" text="See all Upcoming Posts" size="lg" />
-            </a>
+      {upcomingPosts.length > 0 && (
+        <div class="flex flex-col align-stretch sm:align-start gap-6 md:gap-8">
+          <h2 class="text-center sm:text-left text-2xl sm:text-3xl md:text-4xl font-serif font-bold">
+            Coming Soon
+          </h2>
+          <div class="flex flex-col gap-16">
+            {upcomingPosts.map((post) => (
+              <BlogPost post={post} size="normal" />
+            ))}
           </div>
-        )
-      }
+          <a href="/blog/unpublished/1">
+            <SolidButton
+              classes="w-full sm:w-auto"
+              text="See all Upcoming Posts"
+              size="lg"
+            />
+          </a>
+        </div>
+      )}
     </div>
 
     <Footer />

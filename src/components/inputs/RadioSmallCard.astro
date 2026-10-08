@@ -20,8 +20,7 @@ const { value, label, group, checked } = Astro.props;
     checked={checked}
     class="cursor-pointer absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed"
   />
-  <span
-    class="text-sm font-medium text-gray-900 capitalize group-has-checked:text-white"
-    >{label}</span
-  >
+  <span class="text-sm font-medium text-gray-900 capitalize group-has-checked:text-white">
+    {label}
+  </span>
 </label>
